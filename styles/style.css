@@ -53,11 +53,11 @@ ol {
 .content {
   display: flex;
   align-items: end;
- 
+
   gap: 30px;
 
-  min-width: 1140px;
-  min-height: 534px;
+  inline-size: 1140px;
+  block-size: 534px;
 }
 
 .result {
@@ -70,10 +70,12 @@ ol {
   position: relative;
 }
 
-.result__video-container video {
+.result__video {
   object-fit: cover;
-  width: 711px;
-  height: 386px;
+  inline-size: 711px;
+  block-size: 386px;
+  object-position: 0 top;
+  width: 100%;
 }
 
 .search-form {
@@ -81,7 +83,6 @@ ol {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  flex-wrap: nowrap;
   gap: 40px;
 }
 
@@ -90,17 +91,11 @@ ol {
   flex-direction: column;
   align-items: flex-start;
   gap: 26px;
-
-  min-height: 534px;
-  min-width: 399px;
-
-  width: 100%;
-  height: 100%;
 }
 
 .content__list {
   position: relative;
-  max-height: 298px;
+  block-size: 298px;
   overflow: auto;
 }
 
@@ -118,15 +113,15 @@ ol {
 
 .content__video-card-thumbnail {
   object-fit: cover;
-  max-width: 194px;
-  max-height: 103px;
+  object-position: 0 top;
+  inline-size: 194px;
+  block-size: 103px;
 }
 
 .content__video-card-description-container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 6px;
 }
 
@@ -134,7 +129,6 @@ ol {
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
 .title {
@@ -143,11 +137,12 @@ ol {
   font-size: 75px;
   font-style: normal;
   font-weight: 700;
-  line-height: 94%;
+  line-height: 0.94;
   text-transform: uppercase;
+  block-size: 210px;
 }
 
-.title .content__accent {
+.content__accent {
   color: #545050;
 }
 
@@ -159,6 +154,10 @@ ol {
 }
 
 .content__card-link_current {
+  background: #545050;
+}
+
+.content__card-link:active {
   background: #545050;
 }
 
@@ -180,7 +179,7 @@ ol {
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; /* 30px */
+  line-height: 1; /* 30px */
   text-transform: uppercase;
 }
 
@@ -190,14 +189,11 @@ ol {
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16.2px; /* 90% */
-}
-
-fieldset {
-  border: none;
+  line-height: 0.9; /* 90% */
 }
 
 .search-form__fieldset {
+  border: none;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -216,16 +212,12 @@ fieldset {
   cursor: pointer;
 }
 
-.search-form__label:focus {
-  outline: none;
+.search-form__label > .search-form__label-text:hover {
+  text-decoration: underline;
 }
 
 .search-form__label:has(:focus-visible) {
   outline: 1px solid #fff;
-}
-
-.search-form__checkbox-list label:hover {
-  text-decoration: underline;
 }
 
 .search-form__textfield {
@@ -238,30 +230,43 @@ fieldset {
   font-family: inherit;
   font-size: inherit;
 
-  min-width: 225px;
-  min-height: 27px;
+  inline-size: 225px;
 
   appearance: none;
+  cursor: pointer;
+}
+
+.search-form__textfield:hover {
+  cursor: text;
+}
+
+.search-form__textfield:active {
+  border: 1px solid #fff;
 }
 
 .search-form__textfield:focus {
   outline: none;
 }
 
+.search-form__textfield:focus-visible {
+  outline: 1px solid #fff;
+}
+
 .search-form__pseudo-checkbox {
   display: inline-flex;
   align-items: center;
-  width: 19px;
-  height: 19px;
+  justify-content: center;
+  inline-size: 19px;
+  block-size: 19px;
   border: 1px solid #fff;
   cursor: pointer;
 }
 
-input[type="checkbox"]:checked + span {
-  background-image: url("../images/checked.svg");
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  content: "";
+  background: #fff;
+  inline-size: 15px;
+  block-size: 15px;
 }
 
 .button {
@@ -274,9 +279,10 @@ input[type="checkbox"]:checked + span {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
   width: 100%;
-  min-height: 34px;
+  block-size: 34px;
+
+  appearance: none;
 }
 
 .button:focus {
@@ -297,7 +303,6 @@ input[type="checkbox"]:checked + span {
 }
 
 .search-form__submit-button {
-  margin-left: auto;
-  margin-top: auto;
-  max-width: 194px;
+  align-self: flex-end;
+  inline-size: 194px;
 }
