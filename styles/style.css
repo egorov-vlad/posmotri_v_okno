@@ -212,7 +212,7 @@ ol {
   cursor: pointer;
 }
 
-.search-form__label > .search-form__label-text:hover {
+.search-form__label:hover .search-form__label-text {
   text-decoration: underline;
 }
 
@@ -297,7 +297,7 @@ ol {
   text-decoration: underline;
 }
 
-.buttom:focus-visible {
+.button:focus-visible {
   outline: 1px solid #fff;
   outline-offset: 1px;
 }
